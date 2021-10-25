@@ -13,11 +13,15 @@ import android.widget.Toast;
 
 import com.example.checkapartment.R;
 import com.example.checkapartment.databinding.FragmentLoginBinding;
+import com.example.checkapartment.modelo.Departamento;
+
+import java.util.ArrayList;
 
 
 public class LoginFrag extends Fragment {
 
 FragmentLoginBinding b;
+static ArrayList<Departamento> departamento = new ArrayList<>();
     int cont=3;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +52,16 @@ FragmentLoginBinding b;
 
                 }
                  if (mail.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$") && (pass.equals("123Pass"))) {
-                    Navigation.findNavController(v).navigate(R.id.action_loginFrag_to_inicioFragment2);
+
+                     departamento.add((new Departamento("Las Palmas",345,"san francisco 345")));
+                     departamento.add((new Departamento("Verdece",345,"apoquindo 1036")));
+                     departamento.add((new Departamento("Malbec",345,"republica 234")));
+                     departamento.add((new Departamento("Livin",345,"portugal 148")));
+                     departamento.add((new Departamento("Carrion",345,"alameda 942")));
+
+                     Bundle bundle = new Bundle();
+                     bundle.putSerializable("departamento",(ArrayList<Departamento>)departamento);
+                    Navigation.findNavController(v).navigate(R.id.action_loginFrag_to_inicioFragment2,bundle);
                 } else {
                     cont--;
                     Toast.makeText(getActivity(),"tiene "+cont+" intentos restantes", Toast.LENGTH_SHORT).show();

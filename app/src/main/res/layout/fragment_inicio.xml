@@ -6,7 +6,7 @@
     tools:context=".fragmentos.InicioFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tvLista"
+        android:id="@+id/rvLista"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_layout"/>
