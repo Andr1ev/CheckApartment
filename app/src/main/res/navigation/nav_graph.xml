@@ -17,5 +17,14 @@
         android:id="@+id/inicioFragment"
         android:name="com.example.checkapartment.fragmentos.InicioFragment"
         android:label="fragment_inicio"
-        tools:layout="@layout/fragment_inicio" />
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_inicioFragment_to_calculoFragment"
+            app:destination="@id/calculoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculoFragment"
+        android:name="com.example.checkapartment.fragmentos.CalculoFragment"
+        android:label="fragment_calculo"
+        tools:layout="@layout/fragment_calculo" />
 </navigation>

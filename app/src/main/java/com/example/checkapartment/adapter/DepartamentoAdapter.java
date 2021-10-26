@@ -16,6 +16,8 @@ import java.util.ArrayList;
 public class DepartamentoAdapter extends RecyclerView.Adapter<DepartamentoAdapter.CustomViewHolder>{
 
     private ArrayList<Departamento> Lista;
+    private OnClickListener listener;
+
 
     public DepartamentoAdapter(ArrayList<Departamento> lista) {
         this.Lista = lista;
@@ -25,7 +27,7 @@ public class DepartamentoAdapter extends RecyclerView.Adapter<DepartamentoAdapte
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout,parent,false);
-        return new CustomViewHolder(view);
+        return new CustomViewHolder(view, listener);
     }
 
     @Override
@@ -41,20 +43,32 @@ public class DepartamentoAdapter extends RecyclerView.Adapter<DepartamentoAdapte
     class CustomViewHolder extends RecyclerView.ViewHolder{
 
         ItemLayoutBinding b;
-        //OnClickListener Listener;
+        OnClickListener listener;
 
-        public CustomViewHolder(@NonNull View itemView) {
+        public CustomViewHolder(@NonNull View itemView, OnClickListener listener) {
             super(itemView);
             b= ItemLayoutBinding.bind(itemView);
+            this.listener=listener;
+
         }
 
         public void bindData(Departamento dep){
             b.tvNombre.setText(dep.getNombre());
             b.tvNumero.setText(String.valueOf(dep.getNumero()));
             b.tvDireccion.setText(dep.getDireccion());
+
+            itemView.setOnClickListener(v -> {
+                listener.onDepartamentoClick(dep);
+            });
+
         }
     }
 
+    public interface OnClickListener{
+        void onDepartamentoClick(Departamento dep);
+    }
 
-
+    public void setListener(OnClickListener listener) {
+        this.listener = listener;
+    }
 }

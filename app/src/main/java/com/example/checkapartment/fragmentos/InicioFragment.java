@@ -3,6 +3,7 @@ package com.example.checkapartment.fragmentos;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -31,25 +32,20 @@ FragmentInicioBinding b;
 
         ArrayList<Departamento> Lista = (ArrayList<Departamento>) getArguments().getSerializable("departamento");
 
-     //   listaDep = new ArrayList<>();
-
-        //llenar();
 
         DepartamentoAdapter adapter = new DepartamentoAdapter(Lista);
         b.rvLista.setLayoutManager(new LinearLayoutManager(getContext()));
         b.rvLista.setAdapter(adapter);
 
-
+        //despues del listener
+        adapter.setListener(dep -> {
+            Bundle bundle= new Bundle();
+            bundle.putSerializable("lista", dep);
+            Navigation.findNavController(container).navigate(R.id.action_inicioFragment_to_calculoFragment,bundle);
+            //Navigation.findNavController(dep).navigate(R.id.action_inicioFragment_to_calculoFragment,bundle);
+        });
 
         return b.getRoot();
     }
-   /* public void llenar(){
-        listaDep.add((new Departamento("Las Palmas",345,"san francisco 345")));
-        listaDep.add((new Departamento("Verdece",345,"apoquindo 1036")));
-        listaDep.add((new Departamento("Malbec",345,"republica 234")));
-        listaDep.add((new Departamento("Livin",345,"portugal 148")));
-        listaDep.add((new Departamento("Carrion",345,"alameda 942")));
-        }
 
-    */
 }
